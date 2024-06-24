@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { initialItems } from "../lib/constants";
 
-type TItem = {
+export type TItem = {
   id: number;
   name: string;
   packed: boolean;
@@ -9,8 +9,9 @@ type TItem = {
 
 
 
-export default function ItemLinst() {
-  const [items, setItems] = useState(initialItems)
+export default function ItemLinst({items}: {
+  items: TItem[]
+}) {
   
   return (
     <ul>
