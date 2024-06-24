@@ -9,6 +9,14 @@ import { initialItems } from '../lib/constants'
 export default function App() {
   const [items, setItems] = useState<TItem[]>(initialItems)
 
+  const handleAddItem = (itemText: string) => {
+    const newItem: TItem = {
+      id: new Date().getTime(),
+      name: itemText,
+      packed: false
+    }
+    setItems(prev => [...prev, newItem])
+  }
 
   return (
     <>
@@ -16,7 +24,7 @@ export default function App() {
       <main>
         <Header />
         <ItemLinst items = {items}/>
-        <Sidebar setItems= {setItems} />
+        <Sidebar handleAddItem= {handleAddItem} />
       </main>
 
       <Footer />

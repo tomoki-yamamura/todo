@@ -2,8 +2,8 @@ import { useRef, useState } from "react";
 import Button from "./Button";
 import { TItem } from "./ItemLinst";
 
-export default function AddItemForm({ setItems }: {
-  setItems: React.Dispatch<React.SetStateAction<TItem[]>>;
+export default function AddItemForm({ handleAddItem }: {
+  handleAddItem: (itemText: string) => void;
 }) {
   const [itemText, setItemText] = useState("")
   const inputRef = useRef<HTMLInputElement>(null)
@@ -16,13 +16,8 @@ export default function AddItemForm({ setItems }: {
         inputRef.current?.focus();
         return;
       }
-      const newItem = {
-        id: new Date().getTime(),
-        name: itemText,
-        packed: false
-      }
 
-      setItems(prev => [...prev, newItem])
+      handleAddItem(itemText)
       setItemText("")
   }
 
