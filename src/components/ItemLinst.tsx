@@ -1,5 +1,3 @@
-import { useState } from "react";
-import { initialItems } from "../lib/constants";
 
 export type TItem = {
   id: number;
@@ -28,7 +26,7 @@ function Item({ item }: {
   return (
     <li className="item">
       <label>
-        <input type="checkbox" />
+        <input type="checkbox" checked={item.packed} />
         {item.name}
       </label>
 

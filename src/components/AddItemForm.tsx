@@ -1,9 +1,8 @@
 import { useRef, useState } from "react";
 import Button from "./Button";
-import { TItem } from "./ItemLinst";
 
-export default function AddItemForm({ handleAddItem }: {
-  handleAddItem: (itemText: string) => void;
+export default function AddItemForm({ onAddItem }: {
+  onAddItem: (itemText: string) => void;
 }) {
   const [itemText, setItemText] = useState("")
   const inputRef = useRef<HTMLInputElement>(null)
@@ -17,7 +16,7 @@ export default function AddItemForm({ handleAddItem }: {
         return;
       }
 
-      handleAddItem(itemText)
+      onAddItem(itemText)
       setItemText("")
   }
 
@@ -33,7 +32,7 @@ export default function AddItemForm({ handleAddItem }: {
         autoFocus={true}
       />
 
-      <Button type="">Add to list</Button>
+      <Button onClick={() => {}} buttonType="">Add to list</Button>
     </form>
   )
 }
