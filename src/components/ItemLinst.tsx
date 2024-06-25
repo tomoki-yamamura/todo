@@ -1,3 +1,4 @@
+import EmptyView from "./EmptyView";
 
 export type TItem = {
   id: number;
@@ -7,34 +8,38 @@ export type TItem = {
 
 
 
-export default function ItemLinst({items, handleDeleteItem, handleToggleItem}: {
+export default function ItemLinst({ items, handleDeleteItem, handleToggleItem }: {
   items: TItem[]
   handleDeleteItem: (id: number) => void;
   handleToggleItem: (id: number) => void;
 }) {
-  
   return (
-    <ul>
+    <ul className="item-list">
+
+      {
+        items.length === 0 && <EmptyView />
+      }
+
       {items.map(item => (
-        <Item handleToggleItem={handleToggleItem} handleDeleteItem={handleDeleteItem} key={item.id} item={item} />
+        <Item onToggleItem={handleToggleItem} onDeleteItem={handleDeleteItem} key={item.id} item={item} />
       ))}
     </ul>
   )
 }
 
-function Item({ item, handleDeleteItem, handleToggleItem }: {
+function Item({ item, onDeleteItem, onToggleItem }: {
   item: TItem
-  handleDeleteItem: (id: number) => void;
-  handleToggleItem: (id: number) => void;
+  onDeleteItem: (id: number) => void;
+  onToggleItem: (id: number) => void;
 }) {
   return (
     <li className="item">
       <label>
-        <input onChange={() => handleToggleItem(item.id)} type="checkbox" checked={item.packed} />
+        <input onChange={() => onToggleItem(item.id)} type="checkbox" checked={item.packed} />
         {item.name}
       </label>
 
-      <button onClick={() => handleDeleteItem(item.id)}>❌</button>
+      <button onClick={() => onDeleteItem(item.id)}>❌</button>
     </li>
   )
 }

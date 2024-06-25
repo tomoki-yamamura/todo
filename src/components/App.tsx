@@ -58,7 +58,7 @@ export default function App() {
     <>
       <BackgroundHeading />
       <main>
-        <Header />
+        <Header totalNumberOfItems={items.length} numberOfItemsPacked={items.filter(item => item.packed === true).length} />
         <ItemLinst 
         items = {items}
         handleDeleteItem={handleDeleteItem}
