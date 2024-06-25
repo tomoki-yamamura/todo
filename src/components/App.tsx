@@ -20,6 +20,21 @@ export default function App() {
     setItems(prev => [...prev, newItem])
   }
 
+  const handleDeleteItem = (id: number) => {
+    const newItems = items.filter(item => id !== item.id)
+    setItems(newItems)
+  }
+
+  const handleToggleItem = (id: number) => {
+    const newItems = items.map(item => {
+      if (item.id === id) {
+        return { ...item, packed: !item.packed}
+      }
+      return item
+    })
+    setItems(newItems)
+  }
+
   const handleRemoveAllItems = () => {
     setItems([]);
   }
@@ -44,7 +59,11 @@ export default function App() {
       <BackgroundHeading />
       <main>
         <Header />
-        <ItemLinst items = {items}/>
+        <ItemLinst 
+        items = {items}
+        handleDeleteItem={handleDeleteItem}
+        handleToggleItem={handleToggleItem}
+        />
         <Sidebar handleAddItem= {handleAddItem}
         handleRemoveAllItems={handleRemoveAllItems}
         handleResetToInitial={handleResetToInitial}
