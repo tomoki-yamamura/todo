@@ -1,4 +1,6 @@
+import Select from "react-select";
 import EmptyView from "./EmptyView";
+import { useState } from "react";
 
 export type TItem = {
   id: number;
@@ -6,6 +8,20 @@ export type TItem = {
   packed: boolean;
 }
 
+const sortingOptions = [
+  {
+    label: "sort by default",
+    value: "default"
+  },
+  {
+    label: "sort by packed",
+    value: "packed"
+  },
+  {
+    label: "sort by unpacked",
+    value: "unpacked"
+  }
+]
 
 
 export default function ItemLinst({ items, handleDeleteItem, handleToggleItem }: {
@@ -13,6 +29,19 @@ export default function ItemLinst({ items, handleDeleteItem, handleToggleItem }:
   handleDeleteItem: (id: number) => void;
   handleToggleItem: (id: number) => void;
 }) {
+  const [sortBy, setSortBy] = useState("default")
+
+  const sortedItems = [...items].sort((a, b) => {
+    if (sortBy == "packed") {
+      return (b.packed ? 1 : 0) - (a.packed ? 1 : 0)
+    }
+    if (sortBy == "unpacked") {
+      return (a.packed ? 1 : 0) - (b.packed ? 1 : 0)
+    }
+    return 0
+  })
+  
+
   return (
     <ul className="item-list">
 
@@ -20,7 +49,13 @@ export default function ItemLinst({ items, handleDeleteItem, handleToggleItem }:
         items.length === 0 && <EmptyView />
       }
 
-      {items.map(item => (
+      {
+        items.length > 0 ? <section className="sorting">
+          <Select onChange={option => setSortBy(option!.value)} defaultValue={sortingOptions[0]} options={sortingOptions} />
+        </section> : null
+      }
+
+      {sortedItems.map(item => (
         <Item onToggleItem={handleToggleItem} onDeleteItem={handleDeleteItem} key={item.id} item={item} />
       ))}
     </ul>
