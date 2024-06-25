@@ -1,6 +1,7 @@
-import Select from "react-select";
-import EmptyView from "./EmptyView";
 import { useMemo, useState } from "react";
+import Select from "react-select";
+import { useItemsContext } from "../lib/hooks";
+import EmptyView from "./EmptyView";
 
 export type TItem = {
   id: number;
@@ -24,12 +25,9 @@ const sortingOptions = [
 ]
 
 
-export default function ItemLinst({ items, handleDeleteItem, handleToggleItem }: {
-  items: TItem[]
-  handleDeleteItem: (id: number) => void;
-  handleToggleItem: (id: number) => void;
-}) {
+export default function ItemLinst() {
   const [sortBy, setSortBy] = useState("default")
+  const {items, handleToggleItem, handleDeleteItem} = useItemsContext();
 
   const sortedItems = useMemo(
     () =>

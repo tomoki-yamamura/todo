@@ -1,4 +1,3 @@
-import { TItem } from "./ItemLinst";
 
 export default function Counter({totalNumberOfItems, numberOfItemsPacked}: {
   totalNumberOfItems: number
