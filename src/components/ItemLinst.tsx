@@ -1,6 +1,6 @@
 import Select from "react-select";
 import EmptyView from "./EmptyView";
-import { useState } from "react";
+import { useMemo, useState } from "react";
 
 export type TItem = {
   id: number;
@@ -31,16 +31,18 @@ export default function ItemLinst({ items, handleDeleteItem, handleToggleItem }:
 }) {
   const [sortBy, setSortBy] = useState("default")
 
-  const sortedItems = [...items].sort((a, b) => {
-    if (sortBy == "packed") {
-      return (b.packed ? 1 : 0) - (a.packed ? 1 : 0)
-    }
-    if (sortBy == "unpacked") {
-      return (a.packed ? 1 : 0) - (b.packed ? 1 : 0)
-    }
-    return 0
-  })
-  
+  const sortedItems = useMemo(
+    () =>
+      [...items].sort((a, b) => {
+        if (sortBy === "packed") {
+          return (b.packed ? 1 : 0) - (a.packed ? 1 : 0)
+        }
+        if (sortBy === "unpacked") {
+          return (a.packed ? 1 : 0) - (b.packed ? 1 : 0)
+        }
+        return 0
+      }), [items, sortBy])
+
 
   return (
     <ul className="item-list">
