@@ -1,4 +1,3 @@
-import ItemsContextProvider from '../context/ItemsContextProvider'
 import BackgroundHeading from './BackgroundHeading'
 import Footer from './Footer'
 import Header from './Header'
@@ -10,11 +9,9 @@ export default function App() {
     <>
       <BackgroundHeading />
       <main>
-        <ItemsContextProvider>
           <Header />
           <ItemLinst />
           <Sidebar />
-        </ItemsContextProvider>
       </main>
       <Footer />
     </>

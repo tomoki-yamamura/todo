@@ -13,7 +13,7 @@ interface ItemState {
   handleAddItem: (itemText: string) => void;
 }
 
-create<ItemState>((set) => ({
+export const useItemsStore = create<ItemState>((set) => ({
   items: initialItems,
   removeAllItems: () => {
     set(() => ({ items: [] }));
