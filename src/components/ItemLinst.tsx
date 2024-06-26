@@ -1,6 +1,5 @@
 import { useMemo, useState } from "react";
 import Select from "react-select";
-import { useItemsContext } from "../lib/hooks";
 import EmptyView from "./EmptyView";
 import { useItemsStore } from "./stores/itemsStore";
 
@@ -31,6 +30,8 @@ export default function ItemLinst() {
   const items = useItemsStore(state => state.items);
   const handleToggleItem = useItemsStore(state => state.handleToggleItem);
   const handleDeleteItem = useItemsStore(state => state.handleDeleteItem);
+
+  console.log("ItemList rendering...");
 
   const sortedItems = useMemo(
     () =>

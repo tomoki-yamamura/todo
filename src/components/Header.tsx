@@ -1,4 +1,3 @@
-import { useItemsContext } from "../lib/hooks";
 import Counter from "./Counter";
 import Logo from "./Logo";
 import { useItemsStore } from "./stores/itemsStore";
